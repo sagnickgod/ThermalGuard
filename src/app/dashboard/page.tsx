@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { TimeSlider } from "@/components/map/TimeSlider";
 import { HotspotDrawer } from "@/components/map/HotspotDrawer";
 import { LiveDemoTrigger } from "@/components/map/LiveDemoTrigger";
+import { AIIncidentCommander } from "@/components/ai/AIIncidentCommander";
 import { Hotspot, Facility, FilterState } from "@/types/database";
 import { supabase } from "@/lib/supabase";
 import { translations, Language } from "@/lib/translations";
@@ -22,7 +23,8 @@ import {
   Zap,
   Activity,
   Radio,
-  Sparkles
+  Sparkles,
+  Bot
 } from "lucide-react";
 
 // Dynamic import of Leaflet Map to avoid SSR issues
@@ -49,6 +51,7 @@ export default function DashboardPage() {
   const [showFacilities, setShowFacilities] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(false);
+  const [flyToTarget, setFlyToTarget] = useState<{ lat: number; lon: number; zoom?: number } | null>(null);
 
   // Filters State
   const [filters, setFilters] = useState<FilterState>({
@@ -192,6 +195,7 @@ export default function DashboardPage() {
             onSelectHotspot={setSelectedHotspot}
             showFacilities={showFacilities}
             onToggleFacilities={() => setShowFacilities(!showFacilities)}
+            flyToTarget={flyToTarget}
           />
 
           {/* Top-Left Floating Controls: Filters & Live Demo Trigger */}
@@ -331,6 +335,12 @@ export default function DashboardPage() {
             onAcknowledgeAlert={handleAcknowledgeAlert}
           />
         )}
+
+        {/* NVIDIA AI Incident Commander Floating HUD */}
+        <AIIncidentCommander
+          onFlyTo={(lat, lon, zoom) => setFlyToTarget({ lat, lon, zoom })}
+          onFilterChange={(cat) => setFilters((f) => ({ ...f, category: cat }))}
+        />
       </div>
     </div>
   );

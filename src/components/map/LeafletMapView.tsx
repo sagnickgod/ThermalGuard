@@ -32,6 +32,7 @@ interface LeafletMapViewProps {
   onSelectHotspot: (hotspot: Hotspot | null) => void;
   showFacilities?: boolean;
   onToggleFacilities?: () => void;
+  flyToTarget?: { lat: number; lon: number; zoom?: number } | null;
 }
 
 export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
@@ -41,6 +42,7 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
   onSelectHotspot,
   showFacilities = true,
   onToggleFacilities,
+  flyToTarget,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
@@ -356,6 +358,16 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
       });
     }
   }, [selectedHotspot]);
+
+  // Fly to target requested by AI Incident Commander
+  useEffect(() => {
+    if (flyToTarget && mapInstanceRef.current) {
+      mapInstanceRef.current.flyTo([flyToTarget.lat, flyToTarget.lon], flyToTarget.zoom || 11, {
+        animate: true,
+        duration: 1.5,
+      });
+    }
+  }, [flyToTarget]);
 
   const handleZoomIn = () => mapInstanceRef.current?.zoomIn();
   const handleZoomOut = () => mapInstanceRef.current?.zoomOut();
