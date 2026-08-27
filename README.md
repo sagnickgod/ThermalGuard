@@ -122,4 +122,4 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 👥 Authors
 - **Team**: ThermalGuard AI Team
-- **Smart India Hackathon 2024**
+- **Smart India Hackathon 2026**
