@@ -76,13 +76,29 @@ export const LiveDemoTrigger: React.FC<LiveDemoTriggerProps> = ({
           explainability_summary: classified.explainReason,
         }).select().single();
 
-        if (ins && classified.predicted_label === "Industrial-Alert") {
-          alertCount++;
-          await supabase.from("alerts").insert({
-            hotspot_id: ins.id,
-            status: "new",
-            notes: `Live Trigger: NASA ${d.satellite} ${d.frp.toFixed(1)} MW detection near ${classified.nearestFac?.name || 'industrial zone'}.`,
-          });
+        if (ins) {
+          if (classified.predicted_label === "Industrial-Alert") {
+            alertCount++;
+            await supabase.from("alerts").insert({
+              hotspot_id: ins.id,
+              status: "new",
+              notes: `Live Trigger SPCB Alert: NASA ${d.satellite} ${d.frp.toFixed(1)} MW flare detected near ${classified.nearestFac?.name || 'industrial complex'}.`,
+            });
+          } else if (classified.predicted_label === "Wildfire") {
+            alertCount++;
+            await supabase.from("alerts").insert({
+              hotspot_id: ins.id,
+              status: "new",
+              notes: `Live Trigger Forest Dept: Spaceborne thermal front ${d.frp.toFixed(1)} MW inside ${classified.nearestFac?.name || 'forest reserve'} perimeter.`,
+            });
+          } else if (classified.predicted_label === "Agri-Burning") {
+            alertCount++;
+            await supabase.from("alerts").insert({
+              hotspot_id: ins.id,
+              status: "new",
+              notes: `Live Trigger CAQM Agri: Open farmland residue burn ${d.frp.toFixed(1)} MW in ${classified.nearestFac?.name || 'farmland belt'}.`,
+            });
+          }
         }
       }
 
