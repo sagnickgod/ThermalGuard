@@ -1,6 +1,6 @@
 # 🔥 ThermalGuard — AI Spaceborne Industrial Fire & Thermal Anomaly Intelligence
 
-> **Smart India Hackathon (SIH 2024)**  
+> **Smart India Hackathon (SIH 2026)**  
 > **Problem Statement ID**: `26162`  
 > **Theme**: Space Technology / AI for Disaster & Environmental Monitoring  
 > **Live Production URL**: [https://thermalguard.pages.dev](https://thermalguard.pages.dev)  

@@ -198,11 +198,11 @@ export default function DashboardPage() {
           />
 
           {/* Top-Left Floating Controls: Filters & Live Demo Trigger */}
-          <div className="absolute top-4 left-4 z-20 flex flex-wrap items-center gap-2.5">
+          <div className="absolute top-4 left-4 z-20 flex items-center gap-2 max-w-[calc(100vw-360px)]">
             {/* Filter Toggle Button */}
             <button
               onClick={() => setFilterPanelOpen(!filterPanelOpen)}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl backdrop-blur-xl border text-xs font-mono font-semibold transition-all shadow-2xl ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl backdrop-blur-xl border text-xs font-mono font-semibold transition-all shadow-2xl shrink-0 ${
                 filterPanelOpen || filters.category !== "ALL" || filters.onlyAlerts
                   ? "bg-orange-500/20 text-orange-400 border-orange-500/50 shadow-orange-500/10"
                   : "bg-navy-950/90 text-slate-300 hover:text-white border-surface-border hover:bg-surface-light"
@@ -216,13 +216,15 @@ export default function DashboardPage() {
             </button>
 
             {/* Live Demo Trigger (Bypasses 6-hour cron for judges) */}
-            <LiveDemoTrigger onIngestComplete={fetchData} lang={lang} />
+            <div className="shrink-0">
+              <LiveDemoTrigger onIngestComplete={fetchData} lang={lang} />
+            </div>
 
             {/* Active Points Count Pill with Live Satellite Indicator */}
-            <div className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-navy-950/90 backdrop-blur-xl border border-surface-border text-xs font-mono text-slate-300 shadow-2xl">
+            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-navy-950/90 backdrop-blur-xl border border-surface-border text-xs font-mono text-slate-300 shadow-2xl shrink-0">
               <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
               <span className="text-orange-400 font-bold">{filteredHotspots.length}</span>
-              <span>/ {hotspots.length} NASA VIIRS Detections</span>
+              <span className="text-slate-400">/ {hotspots.length} NASA VIIRS</span>
             </div>
           </div>
 

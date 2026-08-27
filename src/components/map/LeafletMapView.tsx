@@ -422,8 +422,8 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
         }}
       />
 
-      {/* Top Center: Interactive Category Visibility Chips */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 hidden md:flex items-center gap-1.5 bg-navy-950/95 backdrop-blur-xl p-1.5 rounded-2xl border border-surface-border shadow-2xl">
+      {/* Top Right: Interactive Category Visibility Chips */}
+      <div className="absolute top-4 right-36 z-20 hidden xl:flex items-center gap-1.5 bg-navy-950/95 backdrop-blur-xl p-1.5 rounded-2xl border border-surface-border shadow-2xl">
         <button
           onClick={() => toggleCategory("Industrial-Alert")}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${

@@ -74,7 +74,7 @@ export default function LandingPage() {
           {/* Cyberpunk Telemetry Tag */}
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-navy-950/90 border border-orange-500/40 text-orange-400 text-xs font-mono backdrop-blur-xl shadow-xl shadow-orange-500/10 animate-in fade-in">
             <span className="w-2.5 h-2.5 rounded-full bg-orange-400 animate-ping inline-block" />
-            <span className="font-bold tracking-wider">SIH 2024 • PROBLEM STATEMENT 26162</span>
+            <span className="font-bold tracking-wider">SIH 2026 • PROBLEM STATEMENT 26162</span>
             <span className="text-slate-500">•</span>
             <span className="text-emerald-400 font-semibold flex items-center gap-1">
               <Radio className="w-3 h-3 animate-pulse" /> LIVE NASA VIIRS NRT

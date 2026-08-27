@@ -41,7 +41,7 @@ export default function LoginPage() {
 
   const handleDemoLogin = (role: "admin" | "analyst") => {
     setEmail(role === "admin" ? "admin@spcb.gov.in" : "analyst@spcb.gov.in");
-    setPassword("ThermalGuard2024!");
+    setPassword("ThermalGuard2026!");
     setTimeout(() => {
       router.push("/dashboard");
     }, 400);
