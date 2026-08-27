@@ -26,35 +26,69 @@ export default function IncidentDetailClient({ id }: { id: string }) {
 
   useEffect(() => {
     async function loadIncident() {
-      if (!id || id === "demo") {
-        // Fetch most recent hotspot if demo or id missing
-        const { data: latest } = await supabase.from("hotspots").select("*").limit(1).single();
-        if (latest) {
-          setHotspot(latest as Hotspot);
-          const { data: aData } = await supabase.from("alerts").select("*").eq("hotspot_id", latest.id).maybeSingle();
-          if (aData) setAlert(aData as Alert);
+      // Determine effective incident ID from props or browser URL
+      let targetId = id;
+      if (typeof window !== "undefined") {
+        const pathParts = window.location.pathname.split("/incident/");
+        if (pathParts.length > 1 && pathParts[1]) {
+          const extracted = pathParts[1].replace(/\/$/, "");
+          if (extracted) targetId = extracted;
         }
-        setIsLoading(false);
-        return;
       }
 
       setIsLoading(true);
       try {
-        const { data: hData } = await supabase
+        if (!targetId || targetId === "demo") {
+          // Fetch peak industrial alert hotspot
+          const { data: peak } = await supabase
+            .from("hotspots")
+            .select("*")
+            .eq("predicted_label", "Industrial-Alert")
+            .order("frp", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (peak) {
+            setHotspot(peak as Hotspot);
+            const { data: aData } = await supabase
+              .from("alerts")
+              .select("*")
+              .eq("hotspot_id", peak.id)
+              .maybeSingle();
+            if (aData) setAlert(aData as Alert);
+          }
+          setIsLoading(false);
+          return;
+        }
+
+        // Fetch exact incident by UUID
+        const { data: hData, error: hErr } = await supabase
           .from("hotspots")
           .select("*")
-          .eq("id", id)
-          .single();
+          .eq("id", targetId)
+          .maybeSingle();
 
         if (hData) {
           setHotspot(hData as Hotspot);
           const { data: aData } = await supabase
             .from("alerts")
             .select("*")
-            .eq("hotspot_id", id)
+            .eq("hotspot_id", targetId)
             .maybeSingle();
 
           if (aData) setAlert(aData as Alert);
+        } else {
+          // Fallback if UUID was deleted/mocked
+          const { data: fallbackHotspot } = await supabase
+            .from("hotspots")
+            .select("*")
+            .order("frp", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (fallbackHotspot) {
+            setHotspot(fallbackHotspot as Hotspot);
+          }
         }
       } catch (err) {
         console.error("Error loading incident", err);
