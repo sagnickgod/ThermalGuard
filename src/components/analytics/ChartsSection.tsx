@@ -71,7 +71,7 @@ export const ChartsSection: React.FC<ChartsSectionProps> = ({
     { name: "Industrial-Normal", value: classCounts["Industrial-Normal"] || 11, color: "#f97316" },
     { name: "Agri-Burning", value: classCounts["Agri-Burning"] || 23, color: "#10b981" },
     { name: "Wildfire", value: classCounts["Wildfire"] || 1, color: "#d946ef" },
-    { name: "Other/Uncategorized", value: classCounts["Other/Uncategorized"] || 800, color: "#64748b" },
+    { name: "Other/Uncategorized", value: classCounts["Other/Uncategorized"] || 800, color: "#38bdf8" },
   ].filter((p) => p.value > 0);
 
   // 2. Temporal Area Flux Timeline

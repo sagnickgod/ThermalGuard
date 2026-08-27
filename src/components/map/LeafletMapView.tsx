@@ -227,10 +227,10 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
       // 2. Industrial-Normal: Neon Amber/Orange (#f97316)
       // 3. Agri-Burning: Vibrant Electric Emerald (#10b981)
       // 4. Wildfire: Distinct Vibrant Neon Fuchsia/Magenta (#d946ef)
-      // 5. Other/Uncategorized: Subtle Muted Slate (#64748b)
-      let dotColor = "#64748b";
-      let ringColor = "rgba(100, 116, 139, 0.2)";
-      let size = 8;
+      // 5. Other/Uncategorized: Vibrant Electric Sky Blue (#38bdf8)
+      let dotColor = "#38bdf8";
+      let ringColor = "rgba(56, 189, 248, 0.5)";
+      let size = 11;
       let pulseHtml = "";
 
       if (isAlert) {
@@ -258,18 +258,18 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
         // Vivid Magenta beacon pulse
         pulseHtml = `<div class="absolute inset-0 rounded-full bg-fuchsia-500 opacity-75 animate-ping"></div>`;
       } else {
-        // Uncategorized: subtle, static micro-dot (no blinking)
-        dotColor = "#64748b";
-        ringColor = "rgba(100, 116, 139, 0.3)";
-        size = 9;
-        pulseHtml = "";
+        // Regional Background Telemetry: Electric Sky Blue with luminous glow ring
+        dotColor = "#38bdf8";
+        ringColor = "rgba(56, 189, 248, 0.6)";
+        size = 11;
+        pulseHtml = `<div class="absolute -inset-1 rounded-full bg-sky-400/30 opacity-60 animate-pulse"></div>`;
       }
 
       const markerHtml = `
         <div class="relative flex items-center justify-center cursor-pointer group" style="width: ${size}px; height: ${size}px;">
           ${pulseHtml}
           ${isSelected ? `<div class="absolute -inset-2 rounded-full border-2 border-cyan-400 border-dashed animate-spin"></div>` : ""}
-          <div class="relative w-full h-full rounded-full flex items-center justify-center border ${isUncategorized ? 'border-slate-500/60 opacity-60' : 'border-white/90 shadow-2xl'} transition-transform group-hover:scale-125" style="background-color: ${dotColor}; box-shadow: 0 0 10px ${ringColor};">
+          <div class="relative w-full h-full rounded-full flex items-center justify-center border ${isUncategorized ? 'border-sky-300 shadow-lg' : 'border-white/90 shadow-2xl'} transition-transform group-hover:scale-125" style="background-color: ${dotColor}; box-shadow: 0 0 10px ${ringColor};">
             ${size >= 16 ? `<div class="w-1.5 h-1.5 bg-white rounded-full"></div>` : ""}
           </div>
         </div>
@@ -478,15 +478,15 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
 
         <button
           onClick={() => setShowUncategorized(!showUncategorized)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all cursor-pointer ${
             showUncategorized
-              ? "bg-slate-800 text-slate-300 border border-slate-700"
-              : "bg-slate-900/40 text-slate-600 border border-transparent line-through"
+              ? "bg-sky-500/20 text-sky-300 border border-sky-500/60 shadow-md shadow-sky-500/20"
+              : "bg-surface-light/40 text-slate-500 border border-transparent hover:text-slate-300 line-through"
           }`}
-          title="Toggle Unclassified Background Satellite Heat"
+          title="Toggle Regional Satellite Background Heat"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-slate-500" />
-          <span>Background ({categoryCounts["Other/Uncategorized"]})</span>
+          <span className="w-2 h-2 rounded-full bg-sky-400" />
+          <span>Regional Heat ({categoryCounts["Other/Uncategorized"]})</span>
         </button>
       </div>
 
@@ -618,7 +618,7 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
               onClick={() => setShowUncategorized(!showUncategorized)}
               className={`px-3 py-1 rounded-lg text-[10px] font-mono font-bold transition-all ${
                 showUncategorized
-                  ? "bg-slate-800 text-cyan-300 border border-cyan-500/40"
+                  ? "bg-sky-950 text-sky-400 border border-sky-500/40"
                   : "bg-red-950/80 text-red-400 border border-red-800/40"
               }`}
             >
@@ -658,8 +658,8 @@ export const LeafletMapView: React.FC<LeafletMapViewProps> = ({
             <span className="text-fuchsia-400 font-bold truncate">Wildfire</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-slate-500 opacity-60 shrink-0" />
-            <span className="text-slate-400 truncate">Background Heat</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-sky-400 ring-2 ring-sky-400/60 shrink-0" />
+            <span className="text-sky-300 font-semibold truncate">Regional Telemetry</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 ring-2 ring-cyan-500/40 shrink-0" />

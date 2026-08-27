@@ -79,11 +79,11 @@ export function getLabelColor(label: string): {
       };
     default:
       return {
-        bg: "bg-slate-700/20",
-        text: "text-slate-400",
-        border: "border-slate-700/40",
-        hex: "#64748b",
-        glow: "rgba(100, 116, 139, 0.2)",
+        bg: "bg-sky-500/20",
+        text: "text-sky-400",
+        border: "border-sky-500/50",
+        hex: "#38bdf8",
+        glow: "rgba(56, 189, 248, 0.6)",
       };
   }
 }
