@@ -223,7 +223,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
 
         {hotspot && (
           <Link
-            href={`/incident/${hotspot.id}`}
+            href={`/incident?id=${hotspot.id}`}
             className="py-2 px-3 rounded-xl bg-surface-light hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-surface-border text-xs font-mono font-medium transition-colors flex items-center gap-1"
             title="Inspect Satellite Telemetry & Statutory PDF"
           >

@@ -251,7 +251,7 @@ export const HotspotDrawer: React.FC<HotspotDrawerProps> = ({
         )}
 
         <Link
-          href={`/incident/${hotspot.id}`}
+          href={`/incident?id=${hotspot.id}`}
           className="w-full py-2.5 px-4 rounded-xl bg-surface-light hover:bg-slate-700 text-slate-200 hover:text-white font-medium text-xs flex items-center justify-center gap-2 border border-surface-border transition-colors font-mono"
         >
           <FileText className="w-4 h-4 text-orange-400" />
