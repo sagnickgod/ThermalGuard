@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Download, FileText, CheckCircle2, ShieldAlert, Printer, Loader2 } from "lucide-react";
+import { AIIncidentSummary } from "@/components/ai/AIIncidentSummary";
 import { Hotspot, Alert } from "@/types/database";
 import { formatFRP, formatTime } from "@/lib/utils";
 
@@ -146,6 +147,9 @@ export const IncidentReportGenerator: React.FC<IncidentReportGeneratorProps> = (
             </div>
           </div>
         </div>
+
+        {/* NVIDIA AI Incident Synthesis & Statutory Briefing */}
+        <AIIncidentSummary hotspot={hotspot} alert={alert} />
 
         {/* Explainability Engine Reasoning (Crucial for SIH) */}
         <div className="p-4 rounded-xl bg-surface-light/30 print:bg-gray-50 border border-orange-500/40 print:border-orange-300 space-y-2">

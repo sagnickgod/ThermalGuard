@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { AlertCard } from "@/components/alerts/AlertCard";
 import { StatusModal } from "@/components/alerts/StatusModal";
+import { AIAlertsSummary } from "@/components/ai/AIAlertsSummary";
 import { Alert, AlertStatus, Hotspot } from "@/types/database";
 import { supabase } from "@/lib/supabase";
 import { translations, Language } from "@/lib/translations";
@@ -479,6 +480,9 @@ export default function AlertsPage() {
             </div>
           </div>
         </div>
+
+        {/* NVIDIA AI Intelligence Triage Summary */}
+        <AIAlertsSummary alerts={alerts} />
 
         {/* Master Filter Command Bar */}
         <div className="bg-surface/90 backdrop-blur-xl border border-surface-border rounded-3xl p-5 space-y-4 shadow-2xl">

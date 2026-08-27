@@ -6,7 +6,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { TimeSlider } from "@/components/map/TimeSlider";
 import { HotspotDrawer } from "@/components/map/HotspotDrawer";
 import { LiveDemoTrigger } from "@/components/map/LiveDemoTrigger";
-import { AIIncidentCommander } from "@/components/ai/AIIncidentCommander";
 import { Hotspot, Facility, FilterState } from "@/types/database";
 import { supabase } from "@/lib/supabase";
 import { translations, Language } from "@/lib/translations";
@@ -335,12 +334,6 @@ export default function DashboardPage() {
             onAcknowledgeAlert={handleAcknowledgeAlert}
           />
         )}
-
-        {/* NVIDIA AI Incident Commander Floating HUD */}
-        <AIIncidentCommander
-          onFlyTo={(lat, lon, zoom) => setFlyToTarget({ lat, lon, zoom })}
-          onFilterChange={(cat) => setFilters((f) => ({ ...f, category: cat }))}
-        />
       </div>
     </div>
   );
